@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Text;
 using Microsoft.VisualStudio.Language.StandardClassification;
 using Microsoft.VisualStudio.Text;
 using Microsoft.VisualStudio.Text.Classification;
@@ -41,29 +42,46 @@ internal class XkdlClassifier : IClassifier
 			var whitespace = text.Substring(0, text.Length - text.TrimStart().Length);
 			bool endsWithPunctuation = text.Trim().EndsWith("\\") || text.Trim().EndsWith("{") || text.Trim().EndsWith("}");
 
-			// TODO: Also handle quotes
+			var textPartsList = new List<string>();
 
-			//var rawTextParts = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-			var textParts = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+			var inQuote = false;
 
-			//var textPartsList = new List<string>();
+			var currentPart = new StringBuilder();
 
-			//var inQuote = false;
+			// Walk the string to allow for spaces in quoted attribute values
+			for (int i = whitespace.Length; i < text.Length; i++)
+			{
+				if (inQuote)
+				{
+					currentPart.Append(text[i]);
 
-			//for (int i = 0; i < text.Length; i++)
-			//{
-			//	if (!inQuote)
-			//	{
-			//		if (text[i])
-			//	}
-			//	else
-			//	{
-			//		if (text[i])
-			//		{ }
-			//	}
-			//}
+					if (text[i] == '"')
+					{
+						inQuote = false;
+					}
+				}
+				else
+				{
+					if ((char.IsWhiteSpace(text[i]) || text[i] == '\n') && currentPart.Length > 0)
+					{
+						textPartsList.Add(currentPart.ToString());
+						currentPart.Clear();
+					}
+					else
+					{
+						currentPart.Append(text[i]);
 
-			//var textParts = textPartsList.ToArray();
+						if (text[i] == '"')
+						{
+							inQuote = true;
+						}
+					}
+				}
+			}
+
+			textPartsList.Add(currentPart.ToString());
+
+			var textParts = textPartsList.ToArray();
 
 			if (textParts.Length >= 1)
 			{
@@ -84,6 +102,7 @@ internal class XkdlClassifier : IClassifier
 					}
 					else
 					{
+						// Allow for individually commented attributes
 						if (textParts[i].StartsWith("/-"))
 						{
 							list.Add(new ClassificationSpan(new SnapshotSpan(span.Snapshot, span.Start + text.IndexOf(textParts[i]), textParts[i].Length), classificationComment));
