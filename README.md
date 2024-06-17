@@ -1,4 +1,6 @@
-# Xkdl
+# XKDL (pronounced "Skuddle")
+
+It's a variant of [KDL](https://kdl.dev/) (pronounced "Cuddle") for creating XAML files.
 
 ## todos
 
@@ -24,6 +26,8 @@ override generated method signature
 embed C# in XKDL
 
 embed XAML in XKDL
+
+determine default settings based on project type - walk to find the csproj file and read that to determine
 
 
 ## MAUI new
