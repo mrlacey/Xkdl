@@ -15,6 +15,8 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 
 	public override string GetDefaultExtension() => ".xaml";
 
+	private int _generatedMethodCounter = 0;
+
 	protected override byte[] GenerateCode(string inputFileName, string inputFileContent)
 	{
 		try
@@ -46,7 +48,7 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 
 			GenerateOutput(settings, doc, 0, sbXaml, sbCs);
 
-			var csFileName = Path.ChangeExtension(inputFileName, ".xkdl.xaml.cs");
+			var csFileName = Path.ChangeExtension(inputFileName, ".xkdl.cs");
 
 			var csString = sbCs.ToString();
 
@@ -198,15 +200,20 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 				}
 				else if (pValue.StartsWith("@") && pValue.EndsWith("@"))
 				{
-					var methodName = $"Gen_On_{node.Identifier}_{prop.Key}";
+					var incrementer = _generatedMethodCounter > 0 ? _generatedMethodCounter.ToString() : string.Empty;
+					_generatedMethodCounter++;
+
+					var methodName = $"Gen_On_{node.Identifier}{incrementer}_{prop.Key}";
 
 					if (node.Properties.TryGetValue("Name", out var nameProp))
 					{
 						methodName = $"Gen_On_{nameProp.ToKdlString().Trim('"')}_{prop.Key}";
+						_generatedMethodCounter--;
 					}
 					else if (node.Properties.TryGetValue("x:Name", out var xnameProp))
 					{
 						methodName = $"Gen_On_{xnameProp.ToKdlString().Trim('"')}_{prop.Key}";
+						_generatedMethodCounter--;
 					}
 
 					sbCSharp.AppendLine($"private void {methodName}(object sender, EventArgs e)");

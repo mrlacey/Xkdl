@@ -11,7 +11,7 @@ namespace XkdlPoc
         public const string Name = "XkdlPoc";
         public const string Description = @"Empty VSIX Project.";
         public const string Language = "en-US";
-        public const string Version = "0.0.3.0";
+        public const string Version = "0.0.3.2";
         public const string Author = "Matt Lacey";
         public const string Tags = "";
     }
