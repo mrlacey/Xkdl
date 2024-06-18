@@ -11,7 +11,7 @@ namespace XkdlPoc
         public const string Name = "XKDL PoC";
         public const string Description = @"Basic XKDL support";
         public const string Language = "en-US";
-        public const string Version = "0.0.4.1";
+        public const string Version = "0.0.4.2";
         public const string Author = "Matt Lacey";
         public const string Tags = "";
     }

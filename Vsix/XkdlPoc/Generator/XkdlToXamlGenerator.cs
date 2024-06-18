@@ -64,9 +64,8 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 		{
 			var sb = new StringBuilder();
 
-			sb.AppendLine("<! --");
-			sb.AppendLine($"/// There was an error converting XKDL to XAML (v{Vsix.Version})");
-			sb.AppendLine($"/// version {Vsix.Version}");
+			sb.AppendLine("<!--");
+			sb.AppendLine($"There was an error converting XKDL to XAML (v{Vsix.Version})");
 			sb.AppendLine(string.Empty);
 			sb.AppendLine(exc.Message);
 			sb.AppendLine(exc.StackTrace);
