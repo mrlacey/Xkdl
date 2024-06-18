@@ -85,11 +85,11 @@ internal class XkdlClassifier : IClassifier
 
 			if (textParts.Length >= 1)
 			{
-				list.Add(new ClassificationSpan(new SnapshotSpan(span.Snapshot, span.Start, whitespace.Length), classificationDefault));
+				//list.Add(new ClassificationSpan(new SnapshotSpan(span.Snapshot, span.Start, whitespace.Length), classificationDefault));
 
-				for (int i = 0; i < textParts.Length - (endsWithPunctuation ? 1 : 0); i++)
+				for (int i = 0; i < textParts.Length - (endsWithPunctuation ? 2 : 1); i++)
 				{
-					if (!textParts[i].Contains("="))
+					if (!textParts[i].Contains("=") && !textParts[i].Contains("\""))
 					{
 						if (endsWithPunctuation || textParts.Length > 1)
 						{
@@ -106,6 +106,10 @@ internal class XkdlClassifier : IClassifier
 						if (textParts[i].StartsWith("/-"))
 						{
 							list.Add(new ClassificationSpan(new SnapshotSpan(span.Snapshot, span.Start + text.IndexOf(textParts[i]), textParts[i].Length), classificationComment));
+						}
+						else if (!textParts[i].Contains("="))
+						{
+							list.Add(new ClassificationSpan(new SnapshotSpan(span.Snapshot, span.Start + text.IndexOf(textParts[i]), textParts[i].Length), classificationAttributeValue));
 						}
 						else
 						{
