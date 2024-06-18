@@ -28,6 +28,7 @@ namespace XkdlPoc
 	[PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
 	[Guid(XkdlPocPackage.PackageGuidString)]
 
+	[InstalledProductRegistration(Vsix.Name, Vsix.Description, Vsix.Version)]
 	[ProvideCodeGenerator(typeof(XkdlToXamlGenerator), XkdlToXamlGenerator.Name, XkdlToXamlGenerator.Description, true, RegisterCodeBase = true)]
 	[ProvideCodeGeneratorExtension(XkdlToXamlGenerator.Name, ".xkdl")]
 	[ProvideUIContextRule(PackageGuids.CommandVisisiblityString,

@@ -8,10 +8,10 @@ namespace XkdlPoc
     internal sealed partial class Vsix
     {
         public const string Id = "XkdlPoc.45ca478e-eb33-40b4-9f71-4c8212073e28";
-        public const string Name = "XkdlPoc";
-        public const string Description = @"Empty VSIX Project.";
+        public const string Name = "XKDL PoC";
+        public const string Description = @"Basic XKDL support";
         public const string Language = "en-US";
-        public const string Version = "0.0.3.2";
+        public const string Version = "0.0.4.1";
         public const string Author = "Matt Lacey";
         public const string Tags = "";
     }
