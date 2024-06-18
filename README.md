@@ -4,30 +4,15 @@ It's a variant of [KDL](https://kdl.dev/) (pronounced "Cuddle") for creating XAM
 
 ## todos
 
-source generator
-convert monkey details page
-convert sample page
-
-find default settings file
-parse & load default settings
-
-default properties
-
-parse kdl
-parse xkdl
-
-colorize xkdl
-
-indent tabs/spaces
-indent size
+better colorize xkdl
 
 override generated method signature
 
-embed C# in XKDL
-
-embed XAML in XKDL
-
 determine default settings based on project type - walk to find the csproj file and read that to determine
+
+embed XAML in XKDL ??
+indent tabs/spaces
+indent size
 
 
 ## MAUI new
