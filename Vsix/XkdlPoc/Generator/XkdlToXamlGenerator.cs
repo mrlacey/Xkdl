@@ -220,6 +220,7 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 					sbCSharp.AppendLine("{");
 					sbCSharp.AppendLine($"    {pValue.Trim('@')}");
 					sbCSharp.AppendLine("}");
+					sbCSharp.AppendLine();
 
 					pValue = methodName;
 				}
@@ -247,6 +248,5 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 				sbXaml.AppendLine(" />");
 			}
 		}
-
 	}
 }
