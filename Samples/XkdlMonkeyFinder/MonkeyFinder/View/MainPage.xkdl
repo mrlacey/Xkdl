@@ -1,0 +1,65 @@
+c:StandardPage \
+    Title="Monkeys" \
+    ios:Page.UseSafeArea="True" \
+    x:DataType="vm:MonkeysViewModel" {
+    Grid RowDefinitions="*,Auto" {
+        RefreshView Command="{GetMonkeysCommand}" IsRefreshing="{IsRefreshing}" {
+            ContentView {
+                CollectionView ItemsSource="{Monkeys}" SelectionMode="None" {
+                    CollectionView.EmptyView {
+                        StackLayout Padding="100" {
+                            Image "nodata.png" \
+                                HeightRequest="{StaticResource LargeSquareImageSize}" \
+                                HorizontalOptions="Center" \
+                                VerticalOptions="Center" \
+                                WidthRequest="{StaticResource LargeSquareImageSize}" 
+                        } 
+                    } 
+                    CollectionView.ItemTemplate {
+                        DataTemplate x:DataType="model:Monkey" {
+                            Grid Padding="{StaticResource StandardItemPadding}" HorizontalOptions="Fill" {
+                                s:CardView HeightRequest="{StaticResource SmallSquareImageSize}" {
+                                    Frame.GestureRecognizers {
+                                        TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MonkeysViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}"
+                                    }
+                                    Grid Padding="0" {
+                                        Grid.ColumnDefinitions {
+                                            ColumnDefinition Width="{StaticResource SmallSquareImageSize}" 
+                                            ColumnDefinition Width="*" 
+                                        }
+                                        Image "{Image}" \
+                                            HeightRequest="{StaticResource SmallSquareImageSize}" \
+                                            WidthRequest="{StaticResource SmallSquareImageSize}" 
+                                        VerticalStackLayout \
+                                            Grid.Column="1" \
+                                            Padding="{StaticResource StandardItemPadding}" \
+                                            VerticalOptions="Center" {
+                                            s:Heading "{Name}" 
+                                            s:ListDetails "{Location}" 
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        ActivityIndicator IsRunning="{IsBusy}" IsVisible="{IsBusy}" 
+
+        HorizontalStackLayout \
+            x:Name="RowOfButtons" \
+            Grid.Row="1" \
+            HorizontalOptions="Center" \
+            Spacing="21" {
+            s:StandardButton "{GetMonkeysCommand}" \
+                IsEnabled="{IsNotBusy}" \
+                Text="{x:Static str:UiText.GetMonkeysButtonContent}" 
+
+            s:StandardButton "{GetClosestMonkeyCommand}" \
+                IsEnabled="{IsNotBusy}" \
+                Text="{x:Static str:UiText.FindClosestButtonContent}" 
+        }
+   }
+}

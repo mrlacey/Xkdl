@@ -1,0 +1,16 @@
+c:VerticallyScrollingPage \
+    Title="{Monkey.Name}" \
+    x:DataType="vm:MonkeyDetailsViewModel" {
+
+    c:DetailPageHeader Title="{Monkey.Name}" ImageSource="{Monkey.Image}" 
+
+    VerticalStackLayout {
+        s:StandardButton "{OpenMapCommand}" \
+            Text="{x:Static str:UiText.ShowOnMapButtonContent}"
+
+        s:BodyText "{Monkey.Details}" 
+        s:AdditionalInformation "{Monkey.FormattedLocation}" 
+        s:AdditionalInformation "{Monkey.FormattedPopulation}" 
+    }
+}
+  

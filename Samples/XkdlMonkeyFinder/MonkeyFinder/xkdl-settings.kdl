@@ -1,0 +1,25 @@
+config {
+	namespaces xmlns="http://schemas.microsoft.com/dotnet/2021/maui" \
+			   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" \
+		       xmlns:c="clr-namespace:MonkeyFinder.Controls" \
+			   xmlns:e="clr-namespace:MonkeyFinder.Extensions" \
+			   xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls" \
+			   xmlns:model="clr-namespace:MonkeyFinder.Model" \
+		       xmlns:s="clr-namespace:MonkeyFinder" \
+		       xmlns:str="clr-namespace:MonkeyFinder.Resources.Strings" \
+		       xmlns:vm="clr-namespace:MonkeyFinder.ViewModel" 
+
+	defaultMarkupExtension "Binding"
+
+	autoGenerateClass true
+
+	defaultProperties Label="Text" \
+					  Button="Text" \
+					  s:StandardButton="Command" \
+					  Image="Source" \
+					  s:BodyText="Text" \
+					  s:Heading="Text" \
+					  s:ListDetails="Text" \
+					  s:AdditionalInformation="Text" \
+					  Entry="Text"
+}

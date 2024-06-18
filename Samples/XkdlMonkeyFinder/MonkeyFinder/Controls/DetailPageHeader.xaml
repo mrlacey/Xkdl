@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView x:Class="MonkeyFinder.Controls.DetailPageHeader" x:Name="this" 
+        xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+        xmlns:c="clr-namespace:MonkeyFinder.Controls" 
+        xmlns:e="clr-namespace:MonkeyFinder.Extensions" 
+        xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls" 
+        xmlns:model="clr-namespace:MonkeyFinder.Model" 
+        xmlns:s="clr-namespace:MonkeyFinder" 
+        xmlns:str="clr-namespace:MonkeyFinder.Resources.Strings" 
+        xmlns:vm="clr-namespace:MonkeyFinder.ViewModel" >
+    <VerticalStackLayout x:Name="HeaderSection" BackgroundColor="{StaticResource Primary}" BindingContext="{x:Reference this}" >
+        <Border HeightRequest="{StaticResource LargeSquareImageSize}" Stroke="White" StrokeThickness="6" WidthRequest="{StaticResource LargeSquareImageSize}" >
+            <Border.StrokeShape >
+                <RoundRectangle CornerRadius="{e:GetRadius Diameter={StaticResource LargeSquareImageSize}}"  />
+            </Border.StrokeShape>
+            <Image Source="{Binding ImageSource}" HeightRequest="{StaticResource LargeSquareImageSize}" WidthRequest="{StaticResource LargeSquareImageSize}"  />
+        </Border>
+        <s:Heading Text="{Binding Title}" FontAttributes="Bold" HorizontalOptions="Center" TextColor="White"  />
+    </VerticalStackLayout>
+</ContentView>

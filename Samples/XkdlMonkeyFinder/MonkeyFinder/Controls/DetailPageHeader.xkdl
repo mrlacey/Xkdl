@@ -1,0 +1,23 @@
+ContentView x:Name="this" {
+    VerticalStackLayout \
+        x:Name="HeaderSection" \
+        BackgroundColor="{StaticResource Primary}" \
+        BindingContext="{x:Reference this}" {
+        Border \
+            HeightRequest="{StaticResource LargeSquareImageSize}" \
+            Stroke="White" \
+            StrokeThickness="6" \
+            WidthRequest="{StaticResource LargeSquareImageSize}" {
+            Border.StrokeShape {
+                RoundRectangle CornerRadius="{e:GetRadius Diameter={StaticResource LargeSquareImageSize}}" 
+            }
+            Image "{Binding ImageSource}" \
+                HeightRequest="{StaticResource LargeSquareImageSize}" \
+                WidthRequest="{StaticResource LargeSquareImageSize}"
+        }
+        s:Heading "{Binding Title}" \
+            FontAttributes="Bold" \
+            HorizontalOptions="Center" \
+            TextColor="White"
+    }
+}

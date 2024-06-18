@@ -1,0 +1,104 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net8.0-android;net8.0-ios;net8.0-maccatalyst</TargetFrameworks>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows')) and '$(MSBuildRuntimeType)' == 'Full'">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<OutputType>Exe</OutputType>
+		<RootNamespace>MonkeyFinder</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>MonkeyFinder</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.companyname.monkeyfinder</ApplicationId>
+		<ApplicationIdGuid>ECD44DAE-B03E-4D8B-B427-71865961E696</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\appicon.svg" ForegroundFile="Resources\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Splash Screen -->
+		<MauiSplashScreen Include="Resources\appiconfg.svg" Color="#512BD4" />
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+
+		<!-- Custom Fonts -->
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+	  <PackageReference Include="RapidXaml.CodeGen.Maui" Version="0.1.2">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Resources\Strings\UiText.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>UiText.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Resources\Strings\UiText.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>UiText.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\Sizes.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Controls\DetailPageHeader.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>DetailPageHeader.xkdl</DependentUpon>
+	  </MauiXaml>
+	  <MauiXaml Update="View\DetailsPage.xaml">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>DetailsPage.xkdl</DependentUpon>
+	  </MauiXaml>
+	  <MauiXaml Update="View\MainPage.xaml">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>MainPage.xkdl</DependentUpon>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="Controls\DetailPageHeader.xkdl">
+	    <Generator>XkdlToXamlGenerator</Generator>
+	    <LastGenOutput>DetailPageHeader.xaml</LastGenOutput>
+	  </None>
+	  <None Update="View\DetailsPage.xkdl">
+	    <Generator>XkdlToXamlGenerator</Generator>
+	    <LastGenOutput>DetailsPage.xaml</LastGenOutput>
+	  </None>
+	  <None Update="View\MainPage.xkdl">
+	    <Generator>XkdlToXamlGenerator</Generator>
+	    <LastGenOutput>MainPage.xaml</LastGenOutput>
+	  </None>
+	</ItemGroup>
+</Project>
