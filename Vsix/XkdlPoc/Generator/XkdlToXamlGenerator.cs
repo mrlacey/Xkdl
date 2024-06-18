@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Kadlet;
 using Microsoft.VisualStudio.TextTemplating.VSHost;
+using Newtonsoft.Json.Linq;
 
 namespace XkdlPoc.Generator;
 
@@ -21,27 +22,11 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 	{
 		try
 		{
-
 			var lines = inputFileContent.Split(new[] { Environment.NewLine }, StringSplitOptions.None);
-
-			//var tLines = Tokenizer.TokenizeLines(lines.ToList());
-			//var cLines = Logic.Classifier.ClassifyLines(tLines);
-
-			//var generated = "Generated XAML will go here"; // CSharpGenerator.GenerateOutput(cLines);
-
-
-			//sb.AppendLine("/// </auto-generated>");
-			//sb.AppendLine();
-			//sb.AppendLine($"namespace {FileNamespace};");
-			//sb.AppendLine($"input file name: {System.IO.Path.GetFileNameWithoutExtension(this.InputFilePath)};");
-			//sb.AppendLine();
-			//sb.AppendLine($"{generated}");
 
 			var settings = GetSettings(inputFileName);
 
-
 			var doc = new KdlReader().Parse(inputFileContent);
-
 
 			var sbXaml = new StringBuilder();
 			var sbCs = new StringBuilder();
@@ -178,7 +163,14 @@ public class XkdlToXamlGenerator : BaseCodeGeneratorWithSite
 
 				if (defaultProp is not null)
 				{
-					sbXaml.Append($"{defaultProp}={node.Arguments.First().ToKdlString()} ");
+					var argValue = node.Arguments.First().ToKdlString().Trim('"');
+
+					if (argValue.StartsWith("{") && argValue.EndsWith("}") && !argValue.Contains(" "))
+					{
+						argValue = argValue.Replace("{", $"{{{settings.DefaultMarkupExtension} ");
+					}
+
+					sbXaml.Append($"{defaultProp}=\"{argValue}\" ");
 				}
 			}
 
