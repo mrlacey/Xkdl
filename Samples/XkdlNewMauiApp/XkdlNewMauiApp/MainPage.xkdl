@@ -1,6 +1,6 @@
 ContentPage {
     ScrollView {
-        VerticalStackLayout Padding="30,0" Spacing="25" {
+        VerticalStackLayout Padding="30,0" /-Spacing="25" {
          
             Image Source="dotnet_bot.png" \
                   HeightRequest="185" \
@@ -22,9 +22,9 @@ ContentPage {
                   Clicked="OnCounterClicked" \
                   HorizontalOptions="Fill" 
                   
-            Button   Clicked="@count = 0;@" Text="Reset counter"
+            Button Clicked="@count = 0;@" Text="Reset counter"
                   
-            Button   Clicked="@count--;@" Text="decrese counter"
+            Button Clicked="@count--;@" Text="decrese counter"
         }
     }
 }
